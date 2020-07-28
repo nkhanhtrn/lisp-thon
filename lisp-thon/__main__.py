@@ -1,5 +1,6 @@
 from parse import parse
-
+from env import global_env
+from eval import eval
 
 program = "(begin (define r 10) (* pi (* r r)))"
-print(parse(program))
+print(eval(parse(program)))
