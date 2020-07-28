@@ -1,9 +1,4 @@
-Symbol = str
-Number = (int, float)
-Atom = (Symbol, Number)
-List = list
-Exp = (Atom, List)
-Env = dict
+from typing import *
 
 
 def tokenize(chars: str) -> list:
@@ -32,7 +27,7 @@ def read_from_tokens(tokens: list) -> Exp:
         L = []
         while tokens[0] != ")":
             L.append(read_from_tokens(tokens))
-        tokens.pop(0)
+        tokens.pop(0)  # remove )
         return L
     elif token == ")":
         raise SyntaxError("unexpected )")
@@ -43,8 +38,3 @@ def read_from_tokens(tokens: list) -> Exp:
 def parse(program: str) -> Exp:
     "Return a Scheme expression from a string"
     return read_from_tokens(tokenize(program))
-
-
-if __name__ == "__main__":
-    program = "(begin (define r 10) (* pi (* r r)))"
-    print(parse(program))
