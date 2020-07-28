@@ -38,7 +38,7 @@ def standard_env() -> Env:
             "null?": lambda x: x == [],
             "number?": lambda x: isinstance(x, Number),
             "print": print,
-            "procedurce?": callable,
+            "procedure?": callable,
             "round": round,
             "symbol?": lambda x: isinstance(x, Symbol),
         }
