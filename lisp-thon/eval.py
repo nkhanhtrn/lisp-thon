@@ -16,7 +16,22 @@ def eval(x: Exp) -> Exp:
     elif x[0] == "define":
         (_, symbol, exp) = x
         env[symbol] = eval(exp)
+    elif x[0] == "quote":
+        (_, quote) = x
+        return print_exp(x[1])
+    elif x[0] == "set!":
+        (_, symbol, exp) = x
+        if symbol not in env:
+            raise ValueError("{} is not defined".format(symbol))
+        env[symbol] = eval(exp)
     else:
         proc = eval(x[0])
         args = [eval(arg) for arg in x[1:]]
         return proc(*args)
+
+
+def scheme_str(exp: Exp) -> str:
+    if isinstance(exp, List):
+        return "(" + " ".join(map(scheme_str, exp)) + ")"
+    else:
+        return str(exp)
