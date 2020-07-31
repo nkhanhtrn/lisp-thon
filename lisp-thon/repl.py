@@ -1,6 +1,13 @@
 from typing import *
-from eval import eval, scheme_str
+from eval import eval
 from parse import parse
+
+
+def scheme_str(exp: Exp) -> str:
+    if isinstance(exp, List):
+        return "(" + " ".join(map(scheme_str, exp)) + ")"
+    else:
+        return str(exp)
 
 
 def repl(prompt="lisp.py> "):
@@ -13,3 +20,4 @@ def repl(prompt="lisp.py> "):
 
         except Exception as e:
             print(e)
+

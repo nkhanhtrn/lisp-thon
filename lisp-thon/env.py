@@ -5,7 +5,7 @@ from typing import *
 
 
 def standard_env() -> Env:
-    env = Env()
+    env = {}
     env.update(vars(math))  # sin, cos, sqrt, pi...
     env.update(
         {
@@ -44,7 +44,7 @@ def standard_env() -> Env:
         }
     )
 
-    return env
+    return Env(env.keys(), env.values())
 
 
 global_env = standard_env()
