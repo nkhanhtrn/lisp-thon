@@ -49,4 +49,4 @@ def parse(program: str) -> Expression:
     "Return a Scheme expression from a string"
     validate(program)
     tokens = tokenize(program)
-    return  build_ast(iter(tokens))
+    return  build_ast(iter(tokens))[0]

@@ -25,6 +25,7 @@ class Env(dict):
             "min": min,
             "print": print,
             "round": round,
+
             "apply": lambda proc, args: proc(*args),
             "begin": lambda *x: x[-1],
             "car": lambda x: x[0],
