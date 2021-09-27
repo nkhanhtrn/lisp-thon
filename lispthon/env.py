@@ -1,14 +1,12 @@
 import math
 import operator as op
 
-from typing import *
+from .typing import *
 
-
-def standard_env() -> Env:
-    env = {}
-    env.update(vars(math))  # sin, cos, sqrt, pi...
-    env.update(
-        {
+class Env(dict):
+    def __init__(self):
+        self.update(vars(math)) # sin, cos, sqrt, pi...
+        self.update({
             "+": op.add,
             "-": op.sub,
             "*": op.mul,
@@ -20,32 +18,27 @@ def standard_env() -> Env:
             "=": op.eq,
             "abs": abs,
             "append": op.add,
+            "expt": pow,
+            "length": len,
+            "map": map,
+            "max": max,
+            "min": min,
+            "print": print,
+            "round": round,
             "apply": lambda proc, args: proc(*args),
             "begin": lambda *x: x[-1],
             "car": lambda x: x[0],
             "cdr": lambda x: x[1:],
             "cons": lambda x, y: [x] + y,
             "eq?": op.is_,
-            "expt": pow,
             "equal?": op.eq,
-            "length": len,
             "list": lambda *x: List(x),
             "list?": lambda x: isinstance(x, List),
-            "map": map,
-            "max": max,
-            "min": min,
             "not": op.not_,
             "null?": lambda x: x == [],
             "number?": lambda x: isinstance(x, Number),
-            "print": print,
             "procedure?": callable,
-            "round": round,
             "symbol?": lambda x: isinstance(x, Symbol),
-        }
-    )
+        })
 
-    return Env(env.keys(), env.values())
-
-
-global_env = standard_env()
-
+global_env = Env()
